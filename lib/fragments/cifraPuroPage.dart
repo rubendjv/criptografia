@@ -125,7 +125,7 @@ class homePage extends StatelessWidget {
                   ctrTxtM.text = cesar.decifrar();
                 }
               },
-              child: const Text('Desifrar'),
+              child: const Text('Desifrar Texto'),
             )
           ],)      
         ],
