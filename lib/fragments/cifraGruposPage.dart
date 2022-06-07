@@ -1,17 +1,17 @@
-// ignore_for_file: file_names
-import 'package:criptografia/algoritmos/CifraPuro.dart';
+// ignore_for_file: file_names, camel_case_types
 import 'package:flutter/material.dart';
 
 import 'package:criptografia/navigationDrawer/navigationDrawer.dart';
+import 'package:criptografia/algoritmos/CifraGrupos.dart';
 
-// ignore: camel_case_types
-class cifraPuroPage extends StatelessWidget {
-  static const String routeName = '/cifraPuroPage';
+class cifraGrupoPage extends StatelessWidget {
+  static const String routeName = '/grupoPage';
 
-  cifraPuroPage({Key? key}) : super(key: key);
+  cifraGrupoPage({Key? key}) : super(key: key);
   final ctrTxtM = TextEditingController();
   final ctrTxtC = TextEditingController();
-  final ctrTxtB = TextEditingController(text: '3');
+  final ctrTxtA = TextEditingController(text: '3');
+  final ctrTxtP = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   String accion = "";
 
@@ -19,7 +19,7 @@ class cifraPuroPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text("Cifra Puro"),
+          title: const Text("Events"),
         ),
         drawer: const navigationDrawer(),
         body: Form(
@@ -30,14 +30,31 @@ class cifraPuroPage extends StatelessWidget {
                   padding:
                       const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
                   child: TextFormField(
-                    controller: ctrTxtB,
+                    controller: ctrTxtA,
                     decoration: const InputDecoration(
                       border: OutlineInputBorder(),
-                      labelText: 'Desplazamiento',
+                      labelText: 'Ancho',
                     ),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'Ingrese un valor para Desplazamiento';
+                        return 'Ingrese un valor para Ancho';
+                      }
+                      return null;
+                    },
+                  ),
+                ),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                  child: TextFormField(
+                    controller: ctrTxtP,
+                    decoration: const InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: 'Permutacion',
+                    ),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Ingrese un valor para Permutacion';
                       }
                       return null;
                     },
@@ -98,10 +115,11 @@ class cifraPuroPage extends StatelessWidget {
                       onPressed: () {
                         accion = "M";
                         if (_formKey.currentState!.validate()) {
-                          var cesar = CifraPuro();
-                          cesar.textoClaro = ctrTxtM.text.toUpperCase();
-                          cesar.desplazamiento = int.parse(ctrTxtB.text);
-                          ctrTxtC.text = cesar.cifrar();
+                          CifraGrupos grupo = CifraGrupos();
+                          grupo.ancho = int.parse(ctrTxtA.text);
+                          grupo.textoClaro = ctrTxtM.text;
+                          grupo.toList(ctrTxtP.text);
+                          ctrTxtC.text = grupo.cifrar();
                         }
                       },
                       child: const Text('Cifrar Texto'),
@@ -119,10 +137,11 @@ class cifraPuroPage extends StatelessWidget {
                       onPressed: () {
                         accion = "C";
                         if (_formKey.currentState!.validate()) {
-                          var cesar = CifraPuro();
-                          cesar.textoCifrado = ctrTxtC.text.toUpperCase();
-                          cesar.desplazamiento = int.parse(ctrTxtB.text);
-                          ctrTxtM.text = cesar.decifrar();
+                          CifraGrupos grupo = CifraGrupos();
+                          grupo.ancho = int.parse(ctrTxtA.text);
+                          grupo.textoCifrado = ctrTxtC.text;
+                          grupo.toList(ctrTxtP.text);
+                          ctrTxtM.text = grupo.decifrar();
                         }
                       },
                       child: const Text('Desifrar Texto'),
