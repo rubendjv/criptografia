@@ -40,17 +40,20 @@ class CifraGrupos {
   }
 
   String decifrar() {
-    String salida = textocifrado;
+    textoclaro = textocifrado;
     int N = textocifrado.length;
+    List<String> salida = List.generate(N, (index) => "");
 
     int grupos = (N / ancho).ceil();
     for (int i = 0; i < grupos; i++) {
       for (int j = 0; j < ancho; j++) {
-        int indice = (i * ancho + (lista[j] - 1)).toInt();
+        int indice = i * ancho + j;
         String vC = indice < N ? textocifrado[indice] : 'X';
-        salida += vC;
+        indice = (i * ancho + (lista[j] - 1)).toInt();
+        salida[indice] = vC;
       }
     }
-    return salida;
+    textoclaro = salida.toString();
+    return textoclaro;
   }
 }
