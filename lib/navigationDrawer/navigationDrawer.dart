@@ -36,6 +36,18 @@ class navigationDrawer extends StatelessWidget {
             onTap: () =>
                 Navigator.pushReplacementNamed(context, pageRoutes.cifrag),
           ),
+          createDrawerBodyItem(
+            icon: Icons.crop,
+            text: 'Series',
+            onTap: () =>
+                Navigator.pushReplacementNamed(context, pageRoutes.cifras),
+          ),
+          createDrawerBodyItem(
+            icon: Icons.crop,
+            text: 'Filas',
+            onTap: () =>
+                Navigator.pushReplacementNamed(context, pageRoutes.cifraf),
+          ),
           ListTile(
             title: const Text('App version 1.0.0'),
             onTap: () {},

@@ -1,9 +1,11 @@
+import 'package:criptografia/fragments/cifraSeriesPage.dart';
 import 'package:flutter/material.dart';
 
 import 'package:criptografia/routes/pageRoute.dart';
 import 'package:criptografia/fragments/cifraPuroPage.dart';
 import 'package:criptografia/fragments/cifraPuroClavePage.dart';
 import 'package:criptografia/fragments/cifraGruposPage.dart';
+import 'package:criptografia/fragments/cifraFilasPage.dart';
 
 void main() => runApp(MyApp());
 
@@ -21,6 +23,8 @@ class MyApp extends StatelessWidget {
         pageRoutes.cifrap: (context) => cifraPuroPage(),
         pageRoutes.cifrapc: (context) => cifraPuroClavePage(),
         pageRoutes.cifrag: (context) => cifraGrupoPage(),
+        pageRoutes.cifras: (context) => cifraSeriesPage(),
+        pageRoutes.cifraf: (context) => cifraFilasPage(),
       },
     );
   }
