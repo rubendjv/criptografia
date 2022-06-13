@@ -39,7 +39,7 @@ class CifraGrupos {
     return salida;
   }
 
-  String decifrar() {
+  String descifrar() {
     textoclaro = textocifrado;
     int N = textocifrado.length;
     List<String> salida = List.generate(N, (index) => "");

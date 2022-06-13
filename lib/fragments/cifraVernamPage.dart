@@ -1,17 +1,16 @@
-// ignore_for_file: file_names, camel_case_types, must_be_immutable
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
-
 import 'package:criptografia/navigationDrawer/navigationDrawer.dart';
-import 'package:criptografia/algoritmos/CifraPuroClave.dart';
+import 'package:criptografia/algoritmos/CifraVernam.dart';
 
-class cifraPuroClavePage extends StatelessWidget {
-  static const String routeName = '/cifraPruroClavePage';
+class cifraVernamPage extends StatelessWidget {
+  static const String routeName = '/cifraVernamPage';
 
-  cifraPuroClavePage({Key? key}) : super(key: key);
+  cifraVernamPage({Key? key}) : super(key: key);
   final ctrTxtM = TextEditingController();
   final ctrTxtC = TextEditingController();
-  final ctrTxtB = TextEditingController(text: '3');
-  final ctrTxtClave = TextEditingController();
+  final ctrTxtB = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   String accion = "";
 
@@ -19,53 +18,29 @@ class cifraPuroClavePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text("Cifra Puro con Calve"),
+          title: const Text("Cifra Vernam"),
         ),
         drawer: const navigationDrawer(),
         body: Form(
             key: _formKey,
             child: Column(
               children: <Widget>[
-                Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.all(20.0),
-                        child: TextFormField(
-                          controller: ctrTxtClave,
-                          decoration: const InputDecoration(
-                            border: OutlineInputBorder(),
-                            labelText: 'Clave',
-                          ),
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Ingrese una Clave';
-                            }
-                            return null;
-                          },
-                        ),
-                      ),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                  child: TextFormField(
+                    controller: ctrTxtB,
+                    decoration: const InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: 'Clave',
                     ),
-                    Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.all(20.0),
-                        child: TextFormField(
-                          controller: ctrTxtB,
-                          decoration: const InputDecoration(
-                            border: OutlineInputBorder(),
-                            labelText: 'Desplazamiento',
-                          ),
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Ingrese un Desplazamiento';
-                            }
-                            return null;
-                          },
-                        ),
-                      ),
-                    ),
-                  ],
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Ingrese un numero de Filas';
+                      }
+                      return null;
+                    },
+                  ),
                 ),
                 Card(
                     color: Colors.white,
@@ -122,11 +97,9 @@ class cifraPuroClavePage extends StatelessWidget {
                       onPressed: () {
                         accion = "M";
                         if (_formKey.currentState!.validate()) {
-                          var cesar = CifraPuroClave();
-                          cesar.textoClaro = ctrTxtM.text.toUpperCase();
-                          cesar.desplazamiento = int.parse(ctrTxtB.text);
-                          cesar.textoClave = ctrTxtClave.text.toUpperCase();
-                          ctrTxtC.text = cesar.cifrar();
+                          CifraVernam series = CifraVernam();
+                          ctrTxtC.text =
+                              series.getCifrado(ctrTxtM.text, ctrTxtB.text);
                         }
                       },
                       child: const Text('Cifrar Texto'),
@@ -144,11 +117,9 @@ class cifraPuroClavePage extends StatelessWidget {
                       onPressed: () {
                         accion = "C";
                         if (_formKey.currentState!.validate()) {
-                          var cesar = CifraPuroClave();
-                          cesar.textoCifrado = ctrTxtC.text.toUpperCase();
-                          cesar.desplazamiento = int.parse(ctrTxtB.text);
-                          cesar.textoClave = ctrTxtClave.text.toUpperCase();
-                          ctrTxtM.text = cesar.descifrar();
+                          CifraVernam series = CifraVernam();
+                          ctrTxtM.text =
+                              series.getDescifrado(ctrTxtC.text, ctrTxtB.text);
                         }
                       },
                       child: const Text('Desifrar Texto'),

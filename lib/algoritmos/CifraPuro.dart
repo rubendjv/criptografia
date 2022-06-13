@@ -31,7 +31,7 @@ class CifraPuro {
     return aux;
   }
 
-  String decifrar() {
+  String descifrar() {
     String aux = "";
     int N = alfabeto.length;
 

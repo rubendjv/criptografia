@@ -39,7 +39,7 @@ class CifraPuroClave {
     return aux;
   }
 
-  String decifrar() {
+  String descifrar() {
     //int N = alfabeto.length;
     Cadena cadena = Cadena(clave + alfabeto);
     cadena.eliminarRepetidos();

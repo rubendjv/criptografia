@@ -1,6 +1,6 @@
 // ignore_for_file: file_names
 
-import 'package:criptografia/algoritmos/CifraFilas.dart';
+import 'package:criptografia/algoritmos/CifraZigZag.dart';
 import 'package:flutter/material.dart';
 import 'package:criptografia/navigationDrawer/navigationDrawer.dart';
 
@@ -18,7 +18,7 @@ class cifraFilasPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text("Cifra pof Filas"),
+          title: const Text("Cifra por Filas"),
         ),
         drawer: const navigationDrawer(),
         body: Form(
@@ -97,7 +97,7 @@ class cifraFilasPage extends StatelessWidget {
                       onPressed: () {
                         accion = "M";
                         if (_formKey.currentState!.validate()) {
-                          CifraFilas series = CifraFilas();
+                          CifraZigZag series = CifraZigZag();
                           series.textoClaro = ctrTxtM.text;
                           series.numeroFilas = int.parse(ctrTxtB.text);
                           ctrTxtC.text = series.cifrar();
@@ -118,7 +118,7 @@ class cifraFilasPage extends StatelessWidget {
                       onPressed: () {
                         accion = "C";
                         if (_formKey.currentState!.validate()) {
-                          CifraFilas series = CifraFilas();
+                          CifraZigZag series = CifraZigZag();
                           series.textoCifrado = ctrTxtC.text;
                           series.numeroFilas = int.parse(ctrTxtB.text);
                           ctrTxtM.text = series.descifrar();

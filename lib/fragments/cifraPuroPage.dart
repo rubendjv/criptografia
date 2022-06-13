@@ -122,7 +122,7 @@ class cifraPuroPage extends StatelessWidget {
                           var cesar = CifraPuro();
                           cesar.textoCifrado = ctrTxtC.text.toUpperCase();
                           cesar.desplazamiento = int.parse(ctrTxtB.text);
-                          ctrTxtM.text = cesar.decifrar();
+                          ctrTxtM.text = cesar.descifrar();
                         }
                       },
                       child: const Text('Desifrar Texto'),

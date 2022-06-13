@@ -19,7 +19,7 @@ class cifraGrupoPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text("Events"),
+          title: const Text("Grupos"),
         ),
         drawer: const navigationDrawer(),
         body: Form(
@@ -141,7 +141,7 @@ class cifraGrupoPage extends StatelessWidget {
                           grupo.ancho = int.parse(ctrTxtA.text);
                           grupo.textoCifrado = ctrTxtC.text;
                           grupo.toList(ctrTxtP.text);
-                          ctrTxtM.text = grupo.decifrar();
+                          ctrTxtM.text = grupo.descifrar();
                         }
                       },
                       child: const Text('Desifrar Texto'),

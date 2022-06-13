@@ -48,9 +48,25 @@ class navigationDrawer extends StatelessWidget {
             onTap: () =>
                 Navigator.pushReplacementNamed(context, pageRoutes.cifraf),
           ),
-          ListTile(
-            title: const Text('App version 1.0.0'),
-            onTap: () {},
+          createDrawerBodyItem(
+            icon: Icons.crop,
+            text: 'Zig Zag',
+            onTap: () =>
+                Navigator.pushReplacementNamed(context, pageRoutes.cifraz),
+          ),
+          const Divider(),
+          const Text("  Sustitucion"),
+          createDrawerBodyItem(
+            icon: Icons.crop,
+            text: 'PlayFair',
+            onTap: () =>
+                Navigator.pushReplacementNamed(context, pageRoutes.cifrapf),
+          ),
+          createDrawerBodyItem(
+            icon: Icons.crop,
+            text: 'Vernam',
+            onTap: () =>
+                Navigator.pushReplacementNamed(context, pageRoutes.cifrav),
           ),
         ],
       ),
