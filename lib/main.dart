@@ -1,3 +1,4 @@
+import 'package:criptografia/fragments/cifraColumnasPage.dart';
 import 'package:criptografia/fragments/cifraPlayFairPage.dart';
 import 'package:criptografia/fragments/cifraSeriesPage.dart';
 import 'package:criptografia/fragments/cifraVernamPage.dart';
@@ -9,6 +10,7 @@ import 'package:criptografia/fragments/cifraPuroPage.dart';
 import 'package:criptografia/fragments/cifraPuroClavePage.dart';
 import 'package:criptografia/fragments/cifraGruposPage.dart';
 import 'package:criptografia/fragments/cifraFilasPage.dart';
+import 'package:criptografia/fragments/cifraCardanoPage.dart';
 
 void main() => runApp(MyApp());
 
@@ -21,7 +23,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: cifraPuroClavePage(),
+      home: cifraPuroPage(),
       routes: {
         pageRoutes.cifrap: (context) => cifraPuroPage(),
         pageRoutes.cifrapc: (context) => cifraPuroClavePage(),
@@ -31,6 +33,8 @@ class MyApp extends StatelessWidget {
         pageRoutes.cifraz: (context) => cifraZigZagPage(),
         pageRoutes.cifrapf: (context) => cifraPlayFairPage(),
         pageRoutes.cifrav: (context) => cifraVernamPage(),
+        pageRoutes.cifrarc: (context) => cifraCardanoPage(),
+        pageRoutes.cifrac: (context) => cifraColumnasPage(),
       },
     );
   }

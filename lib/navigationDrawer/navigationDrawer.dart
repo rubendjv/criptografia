@@ -50,9 +50,21 @@ class navigationDrawer extends StatelessWidget {
           ),
           createDrawerBodyItem(
             icon: Icons.crop,
+            text: 'Columnas',
+            onTap: () =>
+                Navigator.pushReplacementNamed(context, pageRoutes.cifrac),
+          ),
+          createDrawerBodyItem(
+            icon: Icons.crop,
             text: 'Zig Zag',
             onTap: () =>
                 Navigator.pushReplacementNamed(context, pageRoutes.cifraz),
+          ),
+          createDrawerBodyItem(
+            icon: Icons.crop,
+            text: 'Rejilla de Cardano',
+            onTap: () =>
+                Navigator.pushReplacementNamed(context, pageRoutes.cifrarc),
           ),
           const Divider(),
           const Text("  Sustitucion"),

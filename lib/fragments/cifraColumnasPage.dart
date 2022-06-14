@@ -1,13 +1,13 @@
 // ignore_for_file: file_names
 
-import 'package:criptografia/algoritmos/CifraFilas.dart';
+import 'package:criptografia/algoritmos/CifraColumnas.dart';
 import 'package:flutter/material.dart';
 import 'package:criptografia/navigationDrawer/navigationDrawer.dart';
 
-class cifraFilasPage extends StatelessWidget {
-  static const String routeName = '/cifraFilasPage';
+class cifraColumnasPage extends StatelessWidget {
+  static const String routeName = '/cifraColumnasPage';
 
-  cifraFilasPage({Key? key}) : super(key: key);
+  cifraColumnasPage({Key? key}) : super(key: key);
   final ctrTxtM = TextEditingController();
   final ctrTxtC = TextEditingController();
   final ctrTxtB = TextEditingController();
@@ -18,7 +18,7 @@ class cifraFilasPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text("Cifra por Filas"),
+          title: const Text("Cifra por Columnas"),
         ),
         drawer: const navigationDrawer(),
         body: SingleChildScrollView(
@@ -33,11 +33,11 @@ class cifraFilasPage extends StatelessWidget {
                         controller: ctrTxtB,
                         decoration: const InputDecoration(
                           border: OutlineInputBorder(),
-                          labelText: 'Filas',
+                          labelText: 'Columnas',
                         ),
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return 'Ingrese un numero de Filas';
+                            return 'Ingrese un numero de Columnas';
                           }
                           return null;
                         },
@@ -100,10 +100,10 @@ class cifraFilasPage extends StatelessWidget {
                           onPressed: () {
                             accion = "M";
                             if (_formKey.currentState!.validate()) {
-                              CifraFilas filas = CifraFilas();
-                              filas.textoClaro = ctrTxtM.text;
-                              filas.numeroFilas = int.parse(ctrTxtB.text);
-                              ctrTxtC.text = filas.cifrar();
+                              CifraColumnas columnas = CifraColumnas();
+                              columnas.textoClaro = ctrTxtM.text;
+                              columnas.numeroColumnas = int.parse(ctrTxtB.text);
+                              ctrTxtC.text = columnas.cifrar();
                             }
                           },
                           child: const Text('Cifrar Texto'),
@@ -123,10 +123,10 @@ class cifraFilasPage extends StatelessWidget {
                           onPressed: () {
                             accion = "C";
                             if (_formKey.currentState!.validate()) {
-                              CifraFilas filas = CifraFilas();
-                              filas.textoCifrado = ctrTxtC.text;
-                              filas.numeroFilas = int.parse(ctrTxtB.text);
-                              ctrTxtM.text = filas.descifrar();
+                              CifraColumnas columnas = CifraColumnas();
+                              columnas.textoCifrado = ctrTxtC.text;
+                              columnas.numeroColumnas = int.parse(ctrTxtB.text);
+                              ctrTxtM.text = columnas.descifrar();
                             }
                           },
                           child: const Text('Desifrar Texto'),

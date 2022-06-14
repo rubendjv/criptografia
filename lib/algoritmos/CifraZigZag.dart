@@ -2,7 +2,6 @@ class CifraZigZag {
   String textoclaro;
   String textocifrado;
   int rails;
-  late List matriz;
 
   CifraZigZag()
       : textoclaro = "",

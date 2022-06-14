@@ -1,24 +1,31 @@
 // ignore_for_file: file_names
-
-import 'package:criptografia/algoritmos/CifraFilas.dart';
+import 'package:criptografia/algoritmos/CifraPuro.dart';
 import 'package:flutter/material.dart';
+
 import 'package:criptografia/navigationDrawer/navigationDrawer.dart';
+import 'package:criptografia/algoritmos/CifraCardano.dart';
 
-class cifraFilasPage extends StatelessWidget {
-  static const String routeName = '/cifraFilasPage';
+// ignore: camel_case_types
+class cifraCardanoPage extends StatefulWidget {
+  static const String routeName = '/cifraCardanoPage';
 
-  cifraFilasPage({Key? key}) : super(key: key);
+  @override
+  _cifraCardanoState createState() => _cifraCardanoState();
+}
+
+class _cifraCardanoState extends State<cifraCardanoPage> {
   final ctrTxtM = TextEditingController();
   final ctrTxtC = TextEditingController();
-  final ctrTxtB = TextEditingController();
+  final ctrTxtB = TextEditingController(text: '3');
   final _formKey = GlobalKey<FormState>();
   String accion = "";
+  CifraCardano cardano = CifraCardano();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text("Cifra por Filas"),
+          title: const Text("Cifra Rejilla de Cardano"),
         ),
         drawer: const navigationDrawer(),
         body: SingleChildScrollView(
@@ -29,19 +36,7 @@ class cifraFilasPage extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.symmetric(
                           horizontal: 8, vertical: 16),
-                      child: TextFormField(
-                        controller: ctrTxtB,
-                        decoration: const InputDecoration(
-                          border: OutlineInputBorder(),
-                          labelText: 'Filas',
-                        ),
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Ingrese un numero de Filas';
-                          }
-                          return null;
-                        },
-                      ),
+                      child: _buildGameBody(),
                     ),
                     Card(
                         color: Colors.white,
@@ -49,7 +44,7 @@ class cifraFilasPage extends StatelessWidget {
                           padding: const EdgeInsets.all(8.0),
                           child: TextFormField(
                             controller: ctrTxtM,
-                            maxLines: 8, //or null
+                            maxLines: 3, //or null
                             decoration: const InputDecoration(
                               border: OutlineInputBorder(),
                               labelText: 'Texto Claro',
@@ -69,7 +64,7 @@ class cifraFilasPage extends StatelessWidget {
                           padding: const EdgeInsets.all(8.0),
                           child: TextFormField(
                             controller: ctrTxtC,
-                            maxLines: 8, //or null
+                            maxLines: 3, //or null
                             decoration: const InputDecoration(
                               border: OutlineInputBorder(),
                               labelText: 'Texto Cifrado',
@@ -100,10 +95,7 @@ class cifraFilasPage extends StatelessWidget {
                           onPressed: () {
                             accion = "M";
                             if (_formKey.currentState!.validate()) {
-                              CifraFilas filas = CifraFilas();
-                              filas.textoClaro = ctrTxtM.text;
-                              filas.numeroFilas = int.parse(ctrTxtB.text);
-                              ctrTxtC.text = filas.cifrar();
+                              ctrTxtC.text = cardano.cifrar(ctrTxtM.text);
                             }
                           },
                           child: const Text('Cifrar Texto'),
@@ -123,10 +115,7 @@ class cifraFilasPage extends StatelessWidget {
                           onPressed: () {
                             accion = "C";
                             if (_formKey.currentState!.validate()) {
-                              CifraFilas filas = CifraFilas();
-                              filas.textoCifrado = ctrTxtC.text;
-                              filas.numeroFilas = int.parse(ctrTxtB.text);
-                              ctrTxtM.text = filas.descifrar();
+                              ctrTxtM.text = cardano.descifrar(ctrTxtC.text);
                             }
                           },
                           child: const Text('Desifrar Texto'),
@@ -135,5 +124,83 @@ class cifraFilasPage extends StatelessWidget {
                     )
                   ],
                 ))));
+  }
+
+  Widget _buildGameBody() {
+    int gridStateLength = cardano.gridState.length;
+    return Column(children: <Widget>[
+      AspectRatio(
+        aspectRatio: 1.0,
+        child: Container(
+          padding: const EdgeInsets.all(8.0),
+          margin: const EdgeInsets.all(8.0),
+          decoration: BoxDecoration(
+              border: Border.all(color: Colors.black, width: 2.0)),
+          child: GridView.builder(
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: gridStateLength,
+            ),
+            itemBuilder: _buildGridItems,
+            itemCount: gridStateLength * gridStateLength,
+          ),
+        ),
+      ),
+    ]);
+  }
+
+  Widget _buildGridItems(BuildContext context, int index) {
+    int gridStateLength = cardano.gridState.length;
+    int x, y = 0;
+    x = (index / gridStateLength).floor();
+    y = (index % gridStateLength);
+    return GestureDetector(
+      onTap: () => _gridItemTapped(x, y),
+      child: GridTile(
+        child: Container(
+          decoration: BoxDecoration(
+              border: Border.all(color: Colors.black, width: 0.5)),
+          child: Center(
+            child: _buildGridItem(x, y),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildGridItem(int x, int y) {
+    switch (cardano.gridState[x][y]) {
+      case '':
+        return const Text('');
+      case '1':
+        return Container(
+          color: Colors.green,
+        );
+      case '2':
+        return Container(
+          color: Colors.yellow,
+        );
+      case '3':
+        return Container(
+          color: Colors.red,
+        );
+      case '4':
+        return Container(
+          color: Colors.blue,
+        );
+      default:
+        return Text(cardano.gridState[x][y].toString());
+    }
+  }
+
+  void _gridItemTapped(int x, int y) {
+    setState(() {
+      if (cardano.gridState[x][y] == '') {
+        cardano.gridState[x][y] = '1';
+        cardano.copiarValor(x, y);
+      } else if (cardano.gridState[x][y] == '1') {
+        cardano.gridState[x][y] = '';
+        cardano.copiarValor(x, y);
+      }
+    });
   }
 }

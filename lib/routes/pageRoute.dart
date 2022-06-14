@@ -1,4 +1,6 @@
 // ignore_for_file: file_names
+import 'package:criptografia/fragments/cifraCardanoPage.dart';
+import 'package:criptografia/fragments/cifraColumnasPage.dart';
 import 'package:criptografia/fragments/cifraFilasPage.dart';
 import 'package:criptografia/fragments/cifraPlayFairPage.dart';
 import 'package:criptografia/fragments/cifraPuroPage.dart';
@@ -18,4 +20,6 @@ class pageRoutes {
   static const String cifraz = cifraZigZagPage.routeName;
   static const String cifrapf = cifraPlayFairPage.routeName;
   static const String cifrav = cifraVernamPage.routeName;
+  static const String cifrarc = cifraCardanoPage.routeName;
+  static const String cifrac = cifraColumnasPage.routeName;
 }
