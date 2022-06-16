@@ -3,6 +3,8 @@ import 'package:criptografia/fragments/cifraPlayFairPage.dart';
 import 'package:criptografia/fragments/cifraSeriesPage.dart';
 import 'package:criptografia/fragments/cifraVernamPage.dart';
 import 'package:criptografia/fragments/cifraZigZagPage.dart';
+import 'package:criptografia/fragments/grupoPage.dart';
+import 'package:criptografia/fragments/kasiskiPage.dart';
 import 'package:flutter/material.dart';
 
 import 'package:criptografia/routes/pageRoute.dart';
@@ -23,7 +25,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: cifraPuroPage(),
+      home: grupoPage(),
       routes: {
         pageRoutes.cifrap: (context) => cifraPuroPage(),
         pageRoutes.cifrapc: (context) => cifraPuroClavePage(),
@@ -35,6 +37,8 @@ class MyApp extends StatelessWidget {
         pageRoutes.cifrav: (context) => cifraVernamPage(),
         pageRoutes.cifrarc: (context) => cifraCardanoPage(),
         pageRoutes.cifrac: (context) => cifraColumnasPage(),
+        pageRoutes.kasiski: (context) => kasiskiPage(),
+        pageRoutes.version: (context) => grupoPage(),
       },
     );
   }

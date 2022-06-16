@@ -80,6 +80,25 @@ class navigationDrawer extends StatelessWidget {
             onTap: () =>
                 Navigator.pushReplacementNamed(context, pageRoutes.cifrav),
           ),
+          const Divider(),
+          const Text("  Cryptoanalisis"),
+          createDrawerBodyItem(
+            icon: Icons.crop,
+            text: 'Kasiski',
+            onTap: () =>
+                Navigator.pushReplacementNamed(context, pageRoutes.kasiski),
+          ),
+          ListTile(
+              title: Row(
+                children: const <Widget>[
+                  Padding(
+                    padding: EdgeInsets.only(left: 8.0),
+                    child: Text('Version 1.0'),
+                  )
+                ],
+              ),
+              onTap: () =>
+                  Navigator.pushReplacementNamed(context, pageRoutes.version)),
         ],
       ),
     );

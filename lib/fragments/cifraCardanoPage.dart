@@ -95,7 +95,9 @@ class _cifraCardanoState extends State<cifraCardanoPage> {
                           onPressed: () {
                             accion = "M";
                             if (_formKey.currentState!.validate()) {
-                              ctrTxtC.text = cardano.cifrar(ctrTxtM.text);
+                              setState(() {
+                                ctrTxtC.text = cardano.cifrar(ctrTxtM.text);
+                              });
                             }
                           },
                           child: const Text('Cifrar Texto'),
@@ -115,7 +117,9 @@ class _cifraCardanoState extends State<cifraCardanoPage> {
                           onPressed: () {
                             accion = "C";
                             if (_formKey.currentState!.validate()) {
-                              ctrTxtM.text = cardano.descifrar(ctrTxtC.text);
+                              setState(() {
+                                ctrTxtM.text = cardano.descifrar(ctrTxtC.text);
+                              });
                             }
                           },
                           child: const Text('Desifrar Texto'),
@@ -128,24 +132,26 @@ class _cifraCardanoState extends State<cifraCardanoPage> {
 
   Widget _buildGameBody() {
     int gridStateLength = cardano.gridState.length;
-    return Column(children: <Widget>[
-      AspectRatio(
-        aspectRatio: 1.0,
-        child: Container(
-          padding: const EdgeInsets.all(8.0),
-          margin: const EdgeInsets.all(8.0),
-          decoration: BoxDecoration(
-              border: Border.all(color: Colors.black, width: 2.0)),
-          child: GridView.builder(
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: gridStateLength,
+    return SizedBox(
+        width: 360, // hard coding child width
+        child: Column(children: <Widget>[
+          AspectRatio(
+            aspectRatio: 1.0,
+            child: Container(
+              padding: const EdgeInsets.all(8.0),
+              margin: const EdgeInsets.all(8.0),
+              decoration: BoxDecoration(
+                  border: Border.all(color: Colors.black, width: 2.0)),
+              child: GridView.builder(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: gridStateLength,
+                ),
+                itemBuilder: _buildGridItems,
+                itemCount: gridStateLength * gridStateLength,
+              ),
             ),
-            itemBuilder: _buildGridItems,
-            itemCount: gridStateLength * gridStateLength,
           ),
-        ),
-      ),
-    ]);
+        ]));
   }
 
   Widget _buildGridItems(BuildContext context, int index) {
@@ -173,20 +179,49 @@ class _cifraCardanoState extends State<cifraCardanoPage> {
         return const Text('');
       case '1':
         return Container(
-          color: Colors.green,
-        );
+            color: Colors.green,
+            child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                child: Text(
+                  cardano.matriz.length > 1
+                      ? cardano.matriz[x][y]
+                      : cardano.gridState[x][y],
+                  style: TextStyle(fontSize: 20),
+                )));
       case '2':
         return Container(
-          color: Colors.yellow,
-        );
+            color: Colors.yellow,
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              child: Text(
+                cardano.matriz.length > 1
+                    ? cardano.matriz[x][y]
+                    : cardano.gridState[x][y],
+                style: TextStyle(fontSize: 20),
+              ),
+            ));
       case '3':
         return Container(
-          color: Colors.red,
-        );
+            color: Colors.red,
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              child: Text(
+                  cardano.matriz.length > 1
+                      ? cardano.matriz[x][y]
+                      : cardano.gridState[x][y],
+                  style: TextStyle(fontSize: 20)),
+            ));
       case '4':
         return Container(
-          color: Colors.blue,
-        );
+            color: Colors.blue,
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              child: Text(
+                  cardano.matriz.length > 1
+                      ? cardano.matriz[x][y]
+                      : cardano.gridState[x][y],
+                  style: TextStyle(fontSize: 20)),
+            ));
       default:
         return Text(cardano.gridState[x][y].toString());
     }

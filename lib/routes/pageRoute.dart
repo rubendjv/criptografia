@@ -9,6 +9,8 @@ import 'package:criptografia/fragments/cifraPuroClavePage.dart';
 import 'package:criptografia/fragments/cifraSeriesPage.dart';
 import 'package:criptografia/fragments/cifraVernamPage.dart';
 import 'package:criptografia/fragments/cifraZigZagPage.dart';
+import 'package:criptografia/fragments/grupoPage.dart';
+import 'package:criptografia/fragments/kasiskiPage.dart';
 
 // ignore: camel_case_types
 class pageRoutes {
@@ -22,4 +24,6 @@ class pageRoutes {
   static const String cifrav = cifraVernamPage.routeName;
   static const String cifrarc = cifraCardanoPage.routeName;
   static const String cifrac = cifraColumnasPage.routeName;
+  static const String kasiski = kasiskiPage.routeName;
+  static const String version = grupoPage.routeName;
 }
