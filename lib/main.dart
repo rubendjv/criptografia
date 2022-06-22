@@ -1,3 +1,5 @@
+// ignore_for_file: equal_keys_in_map
+
 import 'package:criptografia/fragments/cifraColumnasPage.dart';
 import 'package:criptografia/fragments/cifraPlayFairPage.dart';
 import 'package:criptografia/fragments/cifraSeriesPage.dart';

@@ -16,6 +16,7 @@ class _kasiskiState extends State<kasiskiPage> {
   final ctrTxtC = TextEditingController();
   final ctrTxtB = TextEditingController(text: '3');
   final ctrMcd = TextEditingController();
+  final ctrClave = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   String accion = "";
   Kasiski kasiski = Kasiski();
@@ -111,6 +112,7 @@ class _kasiskiState extends State<kasiskiPage> {
                               setState(() {
                                 kasiski.buscarRepetidos();
                                 ctrMcd.text = kasiski.valorMcd().toString();
+                                ctrClave.text = kasiski.clave;
                               });
                             }
                           },
@@ -133,9 +135,9 @@ class _kasiskiState extends State<kasiskiPage> {
                               int cantidad = int.parse(ctrMcd.text);
                               kasiski.subCriptogramas(cantidad);
                               kasiski.subRepeticiones(cantidad);
-                              ctrTxtM.text = kasiski.subcrip.join("\n");
-                              ctrTxtM.text += "\n";
-                              ctrTxtM.text += kasiski.subrep.join("\n");
+                              setState(() {
+                                ctrClave.text = kasiski.clave;
+                              });
                             }
                           },
                           child: const Text('Subcriptogramas'),
@@ -165,24 +167,50 @@ class _kasiskiState extends State<kasiskiPage> {
                         ),
                       ],
                     ),
-                    _tablaRepeticiones(),
+                    kasiski.subcrip.isEmpty
+                        ? _tablaRepeticiones()
+                        : _tablaSubcripto(),
+                    kasiski.subrep.isNotEmpty
+                        ? _tablaAnalisis() //const Text('...'),
+                        : Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: <Widget>[
+                              const Expanded(
+                                child: Padding(
+                                  padding: EdgeInsets.all(20.0),
+                                  child: Text("Longitud de clave"),
+                                ),
+                              ),
+                              Expanded(
+                                child: Padding(
+                                  padding: const EdgeInsets.all(20.0),
+                                  child: TextFormField(
+                                    controller: ctrMcd,
+                                    decoration: const InputDecoration(
+                                      border: OutlineInputBorder(),
+                                      labelText: 'mcd',
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                     Row(
                       mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
                         const Expanded(
                           child: Padding(
                             padding: EdgeInsets.all(20.0),
-                            child: Text("Longitud de clave"),
+                            child: Text("Clave"),
                           ),
                         ),
                         Expanded(
                           child: Padding(
                             padding: const EdgeInsets.all(20.0),
                             child: TextFormField(
-                              controller: ctrMcd,
+                              controller: ctrClave,
                               decoration: const InputDecoration(
                                 border: OutlineInputBorder(),
-                                labelText: 'mcd',
                               ),
                             ),
                           ),
@@ -206,6 +234,54 @@ class _kasiskiState extends State<kasiskiPage> {
                 DataCell(Text(element.cantidad.toString())),
                 DataCell(Text(element.distancia.toString())),
               ]))
+          .toList(),
+    );
+  }
+
+  Widget _tablaSubcripto() {
+    int nf = 0;
+    return DataTable(
+      columns: const [
+        DataColumn(label: Text('Texto')),
+        DataColumn(label: Text('Catidad')),
+      ],
+      rows: kasiski.subcrip
+          .map((element) => DataRow(cells: <DataCell>[
+                DataCell(Text('C' + (++nf).toString() + ':')),
+                DataCell(Text(element)),
+              ]))
+          .toList(),
+    );
+  }
+
+  Widget _tablaAnalisis() {
+    String alfabeto = 'ABCDEFGHIJKLMNÑOPQRSTUVWXYZ ';
+    List<String> fila =
+        List<String>.generate(alfabeto.length, (index) => alfabeto[index]);
+    return DataTable(
+      columnSpacing: 11.0,
+      columns: fila.map((e) => DataColumn(label: Text(e))).toList(),
+      rows: kasiski.subrep
+          .map((element) => DataRow(
+              cells: element
+                  .split(',')
+                  .map((letra) => DataCell(Container(
+                      color: letra.substring(letra.indexOf('.') + 1) == '1'
+                          ? Color.fromARGB(255, 255, 38, 38)
+                          : letra.substring(letra.indexOf('.') + 1) == '2'
+                              ? Color.fromARGB(255, 1, 163, 14)
+                              : letra.substring(letra.indexOf('.') + 1) == '3'
+                                  ? Color.fromARGB(255, 63, 50, 253)
+                                  : letra.substring(letra.indexOf('.') + 1) ==
+                                          '4'
+                                      ? Color.fromARGB(255, 252, 255, 54)
+                                      : Color.fromARGB(255, 255, 255, 255),
+                      child: Padding(
+                          padding: EdgeInsets.all(8),
+                          child: letra.length > 0
+                              ? Text(letra.substring(0, letra.length - 2))
+                              : Text('')))))
+                  .toList()))
           .toList(),
     );
   }
