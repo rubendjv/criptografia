@@ -80,6 +80,12 @@ class navigationDrawer extends StatelessWidget {
             onTap: () =>
                 Navigator.pushReplacementNamed(context, pageRoutes.cifrav),
           ),
+          createDrawerBodyItem(
+            icon: Icons.crop,
+            text: 'Vigenere',
+            onTap: () =>
+                Navigator.pushReplacementNamed(context, pageRoutes.cifravig),
+          ),
           const Divider(),
           const Text("  Cryptoanalisis"),
           createDrawerBodyItem(

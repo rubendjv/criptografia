@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:criptografia/algoritmos/Kasiski.dart';
 import 'package:criptografia/navigationDrawer/navigationDrawer.dart';
+import 'package:criptografia/algoritmos/CifraVigenere.dart';
 
 class kasiskiPage extends StatefulWidget {
   static const String routeName = '/kasiskiPage';
@@ -113,6 +114,7 @@ class _kasiskiState extends State<kasiskiPage> {
                                 kasiski.buscarRepetidos();
                                 ctrMcd.text = kasiski.valorMcd().toString();
                                 ctrClave.text = kasiski.clave;
+                                ctrTxtM.text = "";
                               });
                             }
                           },
@@ -156,11 +158,15 @@ class _kasiskiState extends State<kasiskiPage> {
                                 const Color.fromARGB(255, 255, 94, 0),
                           ),
                           onPressed: () {
-                            accion = "M";
+                            accion = "C";
                             if (_formKey.currentState!.validate()) {
-                              setState(() {
-                                //ctrTxtC.text = kasiski.cifrar(ctrTxtM.text);
-                              });
+                              String texto = ctrTxtC.text.toUpperCase();
+                              texto = texto.replaceAll(' ', '');
+                              texto = texto.replaceAll('\n', '');
+                              CifraVigenere vigenere = CifraVigenere();
+                              vigenere.textoCifrado = texto;
+                              vigenere.textoClave = ctrClave.text.toUpperCase();
+                              ctrTxtM.text = vigenere.descifrar();
                             }
                           },
                           child: const Text('Descifrar Texto'),

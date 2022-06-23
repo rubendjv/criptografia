@@ -8,6 +8,7 @@ import 'package:criptografia/fragments/cifraGruposPage.dart';
 import 'package:criptografia/fragments/cifraPuroClavePage.dart';
 import 'package:criptografia/fragments/cifraSeriesPage.dart';
 import 'package:criptografia/fragments/cifraVernamPage.dart';
+import 'package:criptografia/fragments/cifraVigenerePage.dart';
 import 'package:criptografia/fragments/cifraZigZagPage.dart';
 import 'package:criptografia/fragments/grupoPage.dart';
 import 'package:criptografia/fragments/kasiskiPage.dart';
@@ -26,4 +27,5 @@ class pageRoutes {
   static const String cifrac = cifraColumnasPage.routeName;
   static const String kasiski = kasiskiPage.routeName;
   static const String version = grupoPage.routeName;
+  static const String cifravig = cifraVigenerePage.routeName;
 }

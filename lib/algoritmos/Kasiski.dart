@@ -136,7 +136,8 @@ class Kasiski {
       suma += int.parse(lista[i]);
       if (int.parse(lista[i]) > max) max = int.parse(lista[i]);
     }
-    int promed = (suma / lista.length).ceil();
+    int prom = (suma / lista.length).ceil();
+    int prom2 = ((prom + max) / 2).ceil();
 
     int j;
     int pa = 0;
@@ -144,19 +145,26 @@ class Kasiski {
     int po = 0;
     int ps = 0;
 
-    for (int k = 0; k < 2; k++) {
+    for (int k = 0; k <= 4; k++) {
       for (j = 0; j < lista.length; j++) {
         pa = j;
         pe = (pa + 4) % 27;
         po = (pe + 11) % 27;
         ps = (po + 4) % 27;
 
-        bool sa = int.parse(lista[pa]) >= promed && int.parse(lista[pa]) <= max;
-        bool se = int.parse(lista[pe]) >= promed && int.parse(lista[pe]) <= max;
-        bool so = int.parse(lista[po]) >= promed && int.parse(lista[po]) <= max;
-        bool ss = int.parse(lista[ps]) >= promed && int.parse(lista[ps]) <= max;
+        bool sa0 = int.parse(lista[pa]) >= prom2 && int.parse(lista[pa]) <= max;
+        bool sa1 = int.parse(lista[pa]) >= prom && int.parse(lista[pa]) <= max;
+        bool se = int.parse(lista[pe]) >= prom && int.parse(lista[pe]) <= max;
+        bool so = int.parse(lista[po]) >= prom && int.parse(lista[po]) <= max;
+        bool ss = int.parse(lista[ps]) >= prom && int.parse(lista[ps]) <= max;
+        bool s0 = int.parse(lista[po]) >= 1 && int.parse(lista[po]) <= max;
+        bool s1 = int.parse(lista[ps]) >= 1 && int.parse(lista[ps]) <= max;
 
-        if ((sa && se && so && ss && k == 0) || (sa && se && so && k == 1)) {
+        if ((sa0 && se && so && ss && k == 0) ||
+            (sa1 && se && so && ss && k == 1) ||
+            (sa1 && se && s0 && s1 && k == 2) ||
+            (sa1 && se && so && s1 && k == 3) ||
+            (sa1 && se && so && k == 4)) {
           break;
         }
       }

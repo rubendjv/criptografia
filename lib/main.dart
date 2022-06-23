@@ -7,6 +7,7 @@ import 'package:criptografia/fragments/cifraVernamPage.dart';
 import 'package:criptografia/fragments/cifraZigZagPage.dart';
 import 'package:criptografia/fragments/grupoPage.dart';
 import 'package:criptografia/fragments/kasiskiPage.dart';
+import 'package:criptografia/fragments/cifraVigenerePage.dart';
 import 'package:flutter/material.dart';
 
 import 'package:criptografia/routes/pageRoute.dart';
@@ -41,6 +42,7 @@ class MyApp extends StatelessWidget {
         pageRoutes.cifrac: (context) => cifraColumnasPage(),
         pageRoutes.kasiski: (context) => kasiskiPage(),
         pageRoutes.version: (context) => grupoPage(),
+        pageRoutes.cifravig: (context) => cifraVigenerePage(),
       },
     );
   }
