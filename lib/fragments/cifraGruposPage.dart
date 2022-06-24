@@ -5,7 +5,7 @@ import 'package:criptografia/navigationDrawer/navigationDrawer.dart';
 import 'package:criptografia/algoritmos/CifraGrupos.dart';
 
 class cifraGrupoPage extends StatelessWidget {
-  static const String routeName = '/grupoPage';
+  static const String routeName = '/cifraGrupoPage';
 
   cifraGrupoPage({Key? key}) : super(key: key);
   final ctrTxtM = TextEditingController();

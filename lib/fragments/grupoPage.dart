@@ -39,20 +39,6 @@ class grupoPage extends StatelessWidget {
           Card(
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-              child: Text('CABALLERO ORTIZ MARIA DEL CARMEN',
-                  style: TextStyle(fontSize: 25)),
-            ),
-          ),
-          Card(
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-              child: Text('CAMPOS COSSIO JUAN JOSE',
-                  style: TextStyle(fontSize: 25)),
-            ),
-          ),
-          Card(
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 8, vertical: 3),
               child: Text('CHAMBI GONZALES NIELS ROY',
                   style: TextStyle(fontSize: 25)),
             ),
@@ -61,13 +47,6 @@ class grupoPage extends StatelessWidget {
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 8, vertical: 3),
               child: Text('DORADO GUERRERO CARLOS EDUARDO',
-                  style: TextStyle(fontSize: 25)),
-            ),
-          ),
-          Card(
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-              child: Text('GATICA AGUIRRE VICTOR HUGO',
                   style: TextStyle(fontSize: 25)),
             ),
           ),
